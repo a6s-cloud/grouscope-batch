@@ -1,6 +1,9 @@
 # coding:utf-8
 # 実行例
-# python createWordCloud.py /Users/suzuki_naoto/private_project/a6s-cloud-batch/test_data/tweet1.txt /Users/suzuki_naoto/private_project/a6s-cloud-batch/output/wordcloud_sample1.png
+# python createWordCloud.py \
+#     /path/to/a6s-cloud-batch/test_data/tweet1.txt \
+#     /path/to/RictyDiminished/RictyDiminished-Bold.ttf \
+#     /path/to/a6s-cloud-batch/output/wordcloud_sample1.png
 
 import csv
 from janome.analyzer import Analyzer
@@ -27,7 +30,7 @@ def MorphologicalAnalysis(texts):
     return words_count, words
 
 def main():
-    if(len(args) != 3):
+    if(len(args) != 4):
         print("引数が不正です")
         exit()
 
@@ -43,7 +46,7 @@ def main():
     text = ' '.join(words)
 
     # pathは環境に合わせる必要がある
-    fpath = "~/Library/Fonts/RictyDiminished-Bold.ttf"
+    fpath = args[2]
     
     #ストップワードを設定
     stop_words = [u"こと", u"よう", u"そう", u"これ", u"それ",u"みたい",u"ため",u"やつ",u"さん",u"RT",u"ない",u"ほど",]
@@ -53,6 +56,6 @@ def main():
                         font_path=fpath, width=900, height=500,stopwords=set(stop_words),max_words=300).generate(text)
 
     # 画像出力
-    wordcloud.to_file(args[2])
+    wordcloud.to_file(args[3])
 
 main()
