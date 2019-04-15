@@ -34,7 +34,7 @@ def main():
         print("引数が不正です")
         exit()
 
-    with open(args[1], 'r') as f:
+    with open(args[1], 'r', encoding="utf_8") as f:
         reader = csv.reader(f, delimiter='\t')
         texts = []
         for row in reader:
